@@ -13,6 +13,7 @@ the code!
     sometimes turns around abruptly when he stops moving. Add a way to track
     which way he was walking so he never turns around for no reason.
 
+Search for TODO comments to find the spots you need to change.
 -}
 
 import Keyboard
@@ -53,10 +54,12 @@ step (dt, keys) mario =
 jump : Keys -> Model -> Model
 jump keys mario =
     mario
+    -- TODO: update mario to jump when the user presses up
 
 gravity : Float -> Model -> Model
 gravity dt mario =
     mario
+    -- TODO: have gravity act on mario
 
 physics : Float -> Model -> Model
 physics dt mario =
@@ -68,6 +71,7 @@ physics dt mario =
 walk : Keys -> Model -> Model
 walk keys mario =
     mario
+    -- TODO: make mario move left and right based on keyboard input
 
 
 -- DISPLAY
@@ -76,7 +80,8 @@ display : (Int, Int) -> Model -> Element
 display (w',h') mario =
   let (w,h) = (toFloat w', toFloat h')
 
-      src  = "imgs/mario/stand/right.gif"
+      -- TODO: change the image based on what mario is doing right now
+      src = "imgs/mario/stand/right.gif"
 
       marioImage = image 35 35 src
 
