@@ -62,43 +62,23 @@ main = asText tree1
 
 {- PRACTICE PROBLEMS
 
-Warm up:
-
 (1) Sum all of the elements of a tree.
 
-       sum : Tree Number -> Number
+      sum : Tree Number -> Number
 
 (2) Flatten a tree into a list.
 
-       flatten : Tree a -> [a]
+      flatten : Tree a -> [a]
 
 (3) Check to see if an element is in a given tree.
 
-       isElement : a -> Tree a -> Bool 
-
-Now we have two routes to go, problem (4) is all about getting more familiar
-with ADTs, whereas problem (5) is all about using graphics.
+      isElement : a -> Tree a -> Bool 
 
 (4) Write a general fold function that acts on trees. The fold
     function does not need to guarantee a particular order of
     traversal.
 
       fold : (a -> b -> b) -> b -> Tree a -> b
-
-    (a) Use "fold" to do exercises 1-3 in one line each. The best
-        readable versions I have come up have the following length
-        in characters including spaces and function name:
-          sum: 17
-          flatten: 23
-          isElement: 47
-        See if you can match or beat me! Don't forget about currying
-        and partial application!
-
-    (b) Can "fold" be used to implement "map" or "depth"?
-
-    (c) Try experimenting with different ways to traverse a
-        tree: pre-order, in-order, post-order, depth-first, etc.
-        More info at: http://en.wikipedia.org/wiki/Tree_traversal
 
 (5) Create a reasonable visualization of trees.
 
@@ -113,6 +93,24 @@ with ADTs, whereas problem (5) is all about using graphics.
 
     The best visualizations will probably be primarily done with
     Graphics.Collage.
+
+EXTRA EXERCISES:
+
+(a) Use "fold" to do exercises 1-3 in one line each. The best
+    readable versions I have come up have the following length
+    in characters including spaces and function name:
+      sum: 17
+      flatten: 23
+      isElement: 47
+    See if you can match or beat me! Don't forget about currying
+    and partial application!
+
+(b) Can "fold" be used to implement "map" or "depth"?
+
+(c) Try experimenting with different ways to traverse a
+    tree: pre-order, in-order, post-order, depth-first, etc.
+    More info at: http://en.wikipedia.org/wiki/Tree_traversal
+
 
 -----------------------------------------------------------------}
 
