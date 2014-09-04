@@ -18,7 +18,6 @@ Search for TODO comments to find the spots you need to change.
 
 import Keyboard
 import Window
-import Debug
 
 
 -- MODEL
@@ -95,7 +94,6 @@ display (w',h') mario =
               |> move (0, 24 - h/2)
           , marioImage
               |> toForm
-              |> Debug.trace "mario"
               |> move (mario.x, mario.y + groundY)
           ]
 
@@ -109,6 +107,6 @@ input : Signal (Float, Keys)
 input =
   let delta = lift (\t -> t/20) (fps 25)
       deltaArrows =
-          lift2 (,) delta (Debug.watch "arrows" <~ Keyboard.arrows)
+          lift2 (,) delta Keyboard.arrows
   in
       sampleOn delta deltaArrows
