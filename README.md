@@ -13,7 +13,7 @@ cd cufp-tutorial
 
 cd todo
 elm-get install
-elm --make --only-js
+elm --make --only-js Todo.elm
 cd ..
 
 elm-reactor
