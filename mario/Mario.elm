@@ -16,20 +16,27 @@ the code!
 Search for TODO comments to find the spots you need to change.
 -}
 
+import Color
+import Graphics.Collage (..)
+import Graphics.Element (..)
 import Keyboard
+import Signal
+import Time
 import Window
 
 
 -- MODEL
 
-type Model =
+type alias Model =
     { x  : Float
     , y  : Float
     , vx : Float
     , vy : Float
     }
 
-type Keys = { x:Int, y:Int }
+
+type alias Keys = { x:Int, y:Int }
+
 
 mario : Model
 mario =
@@ -45,20 +52,23 @@ mario =
 step : (Float, Keys) -> Model -> Model
 step (dt, keys) mario =
     mario
-        |> gravity dt
-        |> jump keys
-        |> walk keys
-        |> physics dt
+      |> gravity dt
+      |> jump keys
+      |> walk keys
+      |> physics dt
+
 
 jump : Keys -> Model -> Model
 jump keys mario =
     mario
     -- TODO: update mario to jump when the user presses up
 
+
 gravity : Float -> Model -> Model
 gravity dt mario =
     mario
     -- TODO: have gravity act on mario
+
 
 physics : Float -> Model -> Model
 physics dt mario =
@@ -66,6 +76,7 @@ physics dt mario =
         x <- mario.x + dt * mario.vx,
         y <- mario.y + dt * mario.vy
     }
+
 
 walk : Keys -> Model -> Model
 walk keys mario =
@@ -88,9 +99,9 @@ display (w',h') mario =
   in
       collage w' h'
           [ rect w h
-              |> filled (rgb 174 238 238)
+              |> filled (Color.rgb 174 238 238)
           , rect w 50
-              |> filled (rgb 74 167 43)
+              |> filled (Color.rgb 74 167 43)
               |> move (0, 24 - h/2)
           , marioImage
               |> toForm
@@ -101,12 +112,14 @@ display (w',h') mario =
 -- SIGNALS
 
 main : Signal Element
-main = lift2 display Window.dimensions (foldp step mario input)
+main =
+  Signal.map2 display Window.dimensions (Signal.foldp step mario input)
+
 
 input : Signal (Float, Keys)
 input =
-  let delta = lift (\t -> t/20) (fps 25)
+  let delta = Signal.map (\t -> t/20) (Time.fps 25)
       deltaArrows =
-          lift2 (,) delta Keyboard.arrows
+          Signal.map2 (,) delta Keyboard.arrows
   in
-      sampleOn delta deltaArrows
+      Signal.sampleOn delta deltaArrows

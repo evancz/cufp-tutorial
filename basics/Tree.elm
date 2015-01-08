@@ -6,27 +6,42 @@ number of useful functions.
 This example also includes some challenge problems!
 -}
 
-data Tree a
+import Graphics.Element (..)
+import List
+import Text (asText)
+
+
+type Tree a
     = Empty
     | Node a (Tree a) (Tree a)
 
+
 empty : Tree a
-empty = Empty
+empty =
+  Empty
+
 
 singleton : a -> Tree a
-singleton v = Node v Empty Empty
+singleton v =
+  Node v Empty Empty
+
 
 insert : comparable -> Tree comparable -> Tree comparable
 insert x tree =
-    case tree of
-        Empty -> singleton x
-        Node y left right ->
-            if  | x == y    -> tree
-                | x < y     -> Node y (insert x left) right
-                | otherwise -> Node y left (insert x right)
+  case tree of
+    Empty ->
+      singleton x
 
-fromList : [comparable] -> Tree comparable
-fromList xs = foldl insert empty xs
+    Node y left right ->
+      if  | x == y    -> tree
+          | x < y     -> Node y (insert x left) right
+          | otherwise -> Node y left (insert x right)
+
+
+fromList : List comparable -> Tree comparable
+fromList xs =
+  List.foldl insert empty xs
+
 
 {-| Determine the depth of a tree. What is the deepest path through the tree?
 
@@ -36,10 +51,13 @@ fromList xs = foldl insert empty xs
 -}
 depth : Tree a -> Int
 depth tree =
-    case tree of
-        Empty -> 0
-        Node v left right ->
-            1 + max (depth left) (depth right)
+  case tree of
+    Empty ->
+      0
+
+    Node v left right ->
+      1 + max (depth left) (depth right)
+
 
 {-| Apply a function to every value in the tree.
 
@@ -49,16 +67,21 @@ depth tree =
 -}
 map : (a -> b) -> Tree a -> Tree b
 map f tree =
-    case tree of
-        Empty -> Empty
-        Node v left right ->
-            Node (f v) (map f left) (map f right)
+  case tree of
+    Empty ->
+      Empty
+
+    Node v left right ->
+      Node (f v) (map f left) (map f right)
+
 
 tree1 = fromList [1,2,3]
 tree2 = fromList [2,1,3]
 
+
 main : Element
-main = asText tree1
+main =
+  asText tree1
 
 {- PRACTICE PROBLEMS
 
