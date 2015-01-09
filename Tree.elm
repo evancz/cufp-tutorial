@@ -87,15 +87,15 @@ main =
 
 (1) Sum all of the elements of a tree.
 
-      sum : Tree Number -> Number
+      sum : Tree number -> number
 
 (2) Flatten a tree into a list.
 
       flatten : Tree a -> [a]
 
-(3) Check to see if an element is in a given tree.
+(3) Check to see if a value is in a given tree.
 
-      isElement : a -> Tree a -> Bool 
+      isMember : comparable -> Tree comparable -> Bool 
 
 (4) Write a general fold function that acts on trees. The fold
     function does not need to guarantee a particular order of
@@ -111,7 +111,7 @@ main =
     this happen:
 
       Graphics.Collage
-      String.show
+      Basics.toString
       Graphics.Element.asText
 
     The best visualizations will probably be primarily done with
